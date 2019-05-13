@@ -1,27 +1,35 @@
-# ShsApp
+# SHS APP
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.8.
+## Introduction
 
-## Development server
+SHS is a simple hotels search application which allows the user to search hotels by city and display all it's corresponding details such as hotel information, ratings, and rates.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## How to Install Locally
 
-## Code scaffolding
+```
+1. `Git Bash Here` - to your workspace or `Open a terminal`
+2. `git clone https://github.com/papaya26/shs-app.git`
+3. `cd shs-app`
+4. `npm install`
+5. `ng serve`
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Application will run at `http://localhost:4200/`
+```
 
-## Build
+## To Build for Production
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+```
+npm run build
+```
 
-## Running unit tests
+## To Run Unit Test
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+```
+npm run test
+```
 
-## Running end-to-end tests
+## To Run Unit Test with Code Coverage
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+```
+npm run test:coverage
+```

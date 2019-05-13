@@ -1,6 +1,9 @@
 {
   "name": "shs-app",
   "version": "0.0.0",
+  "author": "Judd Sosa",
+  "description": "A Simple Hotels Seach (SHS)",
+  "url": "https://github.com/papaya26/shs-app",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
