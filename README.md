@@ -4,6 +4,13 @@
 
 SHS is a simple hotels search application which allows the user to search hotels by city and display all it's corresponding details such as hotel information, ratings, and rates.
 
+**_Note_**
+
+You can use the following cities as search criteria:
+
+- Minato
+- Shinjuku
+
 ## How to Install Locally
 
 ```
