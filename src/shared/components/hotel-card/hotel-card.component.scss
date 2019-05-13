@@ -1,0 +1,32 @@
+.mat-card {
+  padding: 5px;
+  min-height: 160px;
+
+  .hotel-photo {
+    img {
+      height: 160px;
+      width: 100%;
+    }
+  }
+
+  .hotel-details {
+    padding: 5px 10px;
+
+    .hotel-name {
+      margin: 10px 0 0 0;
+      cursor: pointer;
+    }
+
+    .hotel-address {
+      margin-top: 0;
+    }
+  }
+
+  .hotel-others {
+    height: 420px;
+
+    .hotel-others-actions {
+      margin-top: auto;
+    }
+  }
+}

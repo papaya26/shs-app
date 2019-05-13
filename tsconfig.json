@@ -11,12 +11,15 @@
     "experimentalDecorators": true,
     "importHelpers": true,
     "target": "es5",
-    "typeRoots": [
-      "node_modules/@types"
-    ],
-    "lib": [
-      "es2018",
-      "dom"
-    ]
+    "typeRoots": ["node_modules/@types"],
+    "lib": ["es2018", "dom"],
+    "paths": {
+      "app*": ["src/app*"],
+      "constants*": ["src/constants*"],
+      "core*": ["src/core*"],
+      "environments*": ["src/environments*"],
+      "interfaces*": ["src/interfaces*"],
+      "shared*": ["src/shared*"]
+    }
   }
 }

@@ -1,0 +1,6 @@
+<div
+  *mobxAutorun
+  [ngStyle]="{ height: 'calc(100vh - ' + appStore?.headerHeight$ + 'px)' }"
+>
+  <ng-content></ng-content>
+</div>

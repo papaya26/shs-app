@@ -1,1 +1,47 @@
-/* You can add global styles to this file, and also import other style files */
+@import '@angular/material/prebuilt-themes/deeppurple-amber.css';
+@import './variables.scss';
+
+body {
+  margin: 0;
+  background-color: $white;
+  * {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+.cover-whole {
+  height: 100%;
+  width: 100%;
+}
+
+.cover-x {
+  width: 100%;
+}
+
+.container-offset {
+  padding: 16px;
+}
+
+.color-accent {
+  color: $accent;
+}
+
+.color-red {
+  color: $red;
+}
+
+.color-green {
+  color: $green;
+}
+
+.link-accent {
+  color: $accent;
+  cursor: pointer;
+}
+
+// ANGULAR MATERIAL OVERRIDES
+.mat-tooltip {
+  white-space: pre-line;
+  font-size: 16px;
+}

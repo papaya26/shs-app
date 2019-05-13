@@ -1,0 +1,172 @@
+<mat-card>
+  <div fxLayout="row wrap">
+    <div class="hotel-photo" fxFlex="100" fxFlex.md="25" fxFlex.lg="25">
+      <img [src]="hotel?.photo" />
+    </div>
+    <div
+      class="hotel-details"
+      fxLayout="column"
+      fxFlex="100"
+      fxFlex.md="60"
+      fxFlex.lg="60"
+      fxLayoutGap="10px"
+    >
+      <h3
+        class="hotel-name"
+        (click)="openOthers()"
+        [matTooltip]="getTaxesAndFeesToolTip()"
+        [matTooltipDisabled]="!hotel?.taxes_and_fees"
+      >
+        <span class="color-accent" *ngIf="hotel?.taxes_and_fees">*</span>
+        <span [matBadge]="hotel?.rating" matBadgeOverlap="false">{{
+          hotel?.name
+        }}</span>
+      </h3>
+      <ngx-stars
+        [readonly]="true"
+        [maxStars]="hotel?.stars"
+        color="#e9cd10"
+      ></ngx-stars>
+      <p class="hotel-address">{{ hotel?.address }}</p>
+      <div class="hotel-competition" fxLayout="row wrap">
+        <div
+          *ngFor="let competition of hotel?.competition | slice: 0:3"
+          fxFlex="100"
+          fxFlex.md="25"
+          fxFlex.lg="25"
+          class="hotel-competition-details"
+        >
+          <app-hotel-competition
+            [competition]="competition"
+            [currencySign]="hotel?.currencySign"
+          ></app-hotel-competition>
+        </div>
+        <div
+          fxFlex="100"
+          fxFlex.md="25"
+          fxFlex.lg="25"
+          fxLayout="column"
+          fxLayoutAlign="end start"
+        >
+          <span
+            *ngIf="hotel?.competition?.length && hotel?.competition?.length > 3"
+            class="link-accent color-accent"
+            (click)="openOthers(1)"
+          >
+            Compare {{ hotel?.competition?.length }} Websites
+          </span>
+        </div>
+      </div>
+    </div>
+    <div
+      fxLayout="column"
+      fxLayoutAlign="center center"
+      fxLayoutGap="10px"
+      fxFlex="100"
+      fxFlex.md="15"
+      fxFlex.lg="15"
+    >
+      <ng-container
+        [ngTemplateOutlet]="savings ? savingsTemplate : hotelRateTemplate"
+        [ngTemplateOutletContext]="{ hotel: hotel, savings: savings }"
+      ></ng-container>
+      <button mat-raised-button color="accent">Book Now!</button>
+    </div>
+  </div>
+  <div
+    fxLayout="column"
+    fxLayoutGap="10px"
+    class="hotel-others"
+    *ngIf="isOthersOpen"
+  >
+    <mat-tab-group [selectedIndex]="activeOthersIndex">
+      <mat-tab label="Info">
+        <div [innerHtml]="hotel?.description"></div>
+      </mat-tab>
+      <mat-tab label="Deals" *ngIf="hotel?.competition?.length">
+        <mat-list>
+          <mat-list-item *ngFor="let competition of hotel?.competition">
+            <div
+              fxFlex="100"
+              fxLayout="row"
+              [ngClass]="{ 'color-green': competition?.name === 'SHS' }"
+            >
+              <span fxFlex="1 1 auto">{{ competition?.name }}</span>
+              <span>{{
+                hotelService.formatPrice(
+                  hotel?.currencySign,
+                  competition?.price
+                )
+              }}</span>
+            </div>
+          </mat-list-item>
+        </mat-list>
+      </mat-tab>
+      <mat-tab label="Taxes and Fees" *ngIf="hotel?.taxes_and_fees">
+        <mat-list>
+          <mat-list-item>
+            <div fxFlex="100" fxLayout="row">
+              <span fxFlex="1 1 auto"><b>Tax</b></span>
+              <span>{{
+                hotelService.formatPrice(
+                  hotel?.currencySign,
+                  hotel?.taxes_and_fees?.tax
+                )
+              }}</span>
+            </div>
+          </mat-list-item>
+          <mat-list-item>
+            <div fxFlex="100" fxLayout="row">
+              <span fxFlex="1 1 auto"><b>Hotel Fees</b></span>
+              <span>{{
+                hotelService.formatPrice(
+                  hotel?.currencySign,
+                  hotel?.taxes_and_fees?.hotel_fees
+                )
+              }}</span>
+            </div>
+          </mat-list-item>
+        </mat-list>
+      </mat-tab>
+    </mat-tab-group>
+    <div class="hotel-others-actions" fxLayout="row" fxLayoutAlign="end center">
+      <button mat-raised-button color="accent" (click)="closeOthers()">
+        Close
+      </button>
+    </div>
+  </div>
+</mat-card>
+
+<ng-template #savingsTemplate let-savings="savings" let-hotel="hotel">
+  <app-hotel-competition
+    [competition]="savings?.mostExpensive"
+    [currencySign]="hotel?.currencySign"
+    [mostExpensive]="true"
+  ></app-hotel-competition>
+  <app-hotel-competition
+    [competition]="savings?.shs"
+    [currencySign]="hotel?.currencySign"
+    [save]="true"
+  ></app-hotel-competition>
+  <h3>
+    Save
+    {{
+      hotelService.formatPrice(
+        hotel?.currencySign,
+        savings?.mostExpensive?.price - savings?.shs?.price
+      )
+    }}!
+  </h3>
+</ng-template>
+
+<ng-template #hotelRateTemplate let-hotel="hotel">
+  <div *ngIf="hotel?.price; else ratesUnavailable">
+    <h3>
+      {{ hotelService.formatPrice(hotel?.currencySign, hotel?.price) }}
+    </h3>
+  </div>
+</ng-template>
+
+<ng-template #ratesUnavailable>
+  <h3>Rates Unavailable</h3>
+</ng-template>

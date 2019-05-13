@@ -1,0 +1,13 @@
+<div
+  class="hotel-competition"
+  [ngClass]="{
+    'most-expensive': mostExpensive,
+    'color-red': mostExpensive,
+    'color-green': save
+  }"
+>
+  <p>{{ competition?.name }}</p>
+  <span>
+    <b> {{ hotelService.formatPrice(currencySign, competition?.price) }}</b>
+  </span>
+</div>

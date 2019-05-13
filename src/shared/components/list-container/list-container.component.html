@@ -1,0 +1,26 @@
+<div *mobxAutorun fxLayout="row" fxLayoutAlign="center center">
+  <div *ngIf="appStore?.isLoading$; else hotelsContainer">
+    <mat-progress-spinner color="primary" mode="indeterminate">
+    </mat-progress-spinner>
+  </div>
+</div>
+
+<ng-template #hotelsContainer>
+  <div
+    *ngIf="appStore?.hotels$?.length; else noHotelsFound"
+    fxLayout="column wrap"
+    fxLayoutAlign="start center"
+    fxLayoutGap="16px"
+    class="cover-x"
+  >
+    <app-hotel-card
+      *ngFor="let hotel of appStore?.hotels$"
+      [hotel]="hotel"
+      fxFlex="100"
+    ></app-hotel-card>
+  </div>
+</ng-template>
+
+<ng-template #noHotelsFound>
+  <span *ngIf="appStore?.hasSearched$">No Hotels Found</span>
+</ng-template>

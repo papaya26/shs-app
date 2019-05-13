@@ -1,0 +1,25 @@
+<mat-toolbar #header color="primary">
+  <mat-toolbar-row>
+    <span fxFlex="1 1 auto">
+      Simple Hotel Seach
+    </span>
+    <button *mobxAutorun mat-button [matMenuTriggerFor]="menu" color="accent">
+      {{ appStore?.currency$ }} <mat-icon>attach_money</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button
+        mat-menu-item
+        *ngFor="let currentOpt of currenciesOpts"
+        (click)="selectCurrency(currentOpt)"
+      >
+        <span
+          [ngClass]="{
+            'color-accent': appStore?.currency$ === currentOpt,
+            'menu-item-active': appStore?.currency$ === currentOpt
+          }"
+          >{{ currentOpt }}</span
+        >
+      </button>
+    </mat-menu>
+  </mat-toolbar-row>
+</mat-toolbar>
