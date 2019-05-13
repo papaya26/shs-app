@@ -22,8 +22,6 @@ export class HotelCardComponent implements OnInit {
   public isOthersOpen: boolean;
   public activeOthersIndex: number;
 
-  private keepOpenIfOpenedOnce: boolean;
-
   constructor(public hotelService: HotelService) {
     this.activeOthersIndex = 0;
   }

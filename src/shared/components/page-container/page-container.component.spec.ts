@@ -1,4 +1,7 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, async } from '@angular/core/testing';
+
+import { CoreModule } from 'core/core.module';
+import { SharedModule } from 'shared/shared.module';
 
 import { PageContainerComponent } from './page-container.component';
 
@@ -8,18 +11,17 @@ describe('PageContainerComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PageContainerComponent ]
+      imports: [CoreModule.forRoot(), SharedModule]
     })
-    .compileComponents();
+      .compileComponents()
+      .then(() => {
+        fixture = TestBed.createComponent(PageContainerComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+      });
   }));
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(PageContainerComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
-
-  it('should create', () => {
+  it('page container component should be created', () => {
     expect(component).toBeTruthy();
   });
 });

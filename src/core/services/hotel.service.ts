@@ -84,8 +84,7 @@ export class HotelService {
         this.initHotelPriceDetails(hotel, hotelPrice, currencySign);
         hotel.competition = this.transformCompetitorPrices(
           hotelPrice,
-          currency,
-          currencySign
+          currency
         );
         filteredHotels.push(hotel);
       } else {
@@ -97,8 +96,7 @@ export class HotelService {
 
   private transformCompetitorPrices(
     hotelPrice: Price,
-    currency: string,
-    currencySign: string
+    currency: string
   ): Competition[] {
     const competition: Competition[] = [];
     const roundOffByHundreds = currency === 'KRW';
@@ -130,7 +128,9 @@ export class HotelService {
 
   private initHotelPriceDetails(hotel: Hotel, hotelPrice: Price, currencySign) {
     hotel.price = hotelPrice.price;
-    hotel.taxes_and_fees = hotelPrice.taxes_and_fees;
+    if (hotelPrice.taxes_and_fees) {
+      hotel.taxes_and_fees = hotelPrice.taxes_and_fees;
+    }
     hotel.currencySign = currencySign;
   }
 
